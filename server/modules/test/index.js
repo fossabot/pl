@@ -2,6 +2,15 @@ import {Router} from 'express';
 
 const router = Router();
 
-router.get('/test', (res) => res.status(500).json({ isWorking: true }));
+router.post('/', (req, res) => {
+  const {isWorking} = req.body;
+  return res.status(200).json({ isWorking: !isWorking });
+});
+router.get('/', (req, res) => {
+  return res.status(200).json({ isWorking: true });
+});
 
-export default router;
+export default {
+  route: '/map/test',
+  router
+};
