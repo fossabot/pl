@@ -1,17 +1,18 @@
-import React from 'react'
-import { Route } from 'react-router-dom'
-import Map from '../map'
-// import Admin from '../admin'
+import React from 'react';
+import { Route, Link } from 'react-router-dom';
+import Map from '../map';
+import Admin from '../admin';
 
 export default () => (
   <div>
     <header>
-      {/*<Link to="/">map</Link>*/}
-      {/*<Link to="/admin">admin</Link>*/}
+      APP
+      <Link to="/map">map</Link>
+      <Link to="/admin">admin</Link>
     </header>
     <main>
-      <Route exact path="/" component={Map} />
-      {/*<Route exact path="/admin" component={Admin} />*/}
+      <Route path="/map" component={Map} />
+      <Route path="/admin" component={Admin} />
     </main>
   </div>
 )

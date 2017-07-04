@@ -1,9 +1,11 @@
-// import React from 'react';
-// import { Route } from 'react-router-dom';
-// import Component from './components';
-//
-// export default {
-//   config: {},
-//   route: <Route exact path="/" component={Component} />,
-//   reducers: []
-// }
+import component from './components';
+import reducers from './reducers';
+import * as actions from './actions';
+
+export default {
+  config: {},
+  path: `/map/test`,
+  component,
+  reducers,
+  actions,
+}

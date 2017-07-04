@@ -1,4 +1,5 @@
-import {TEST_REQUESTED} from './../actions';
+import {getActions} from './../actions';
+const {TEST_REQUESTED2} = getActions('test2');
 
 const initialState = {
   isWorking: false,
@@ -7,13 +8,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case TEST_REQUESTED:
+    case TEST_REQUESTED2:
       return {
         ...state,
-        isWorking: action.isWorking
+        isWorking: !state.isWorking
       };
-      default:
-    return state
+    default:
+      return state
   }
 }
-// todo immutable
