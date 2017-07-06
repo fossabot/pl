@@ -4,12 +4,15 @@ import {connect} from 'react-redux';
 import {getActions} from './../../../actions';
 import {getModuleRoutes} from './../../../helpers/routes';
 import {Switch} from 'react-router-dom';
+import settings from './../settings';
+
+const {path, moduleName} = settings;
 
 class Test extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      routes: getModuleRoutes('test')
+      routes: getModuleRoutes(path)
     }
   }
   componentDidMount () {
@@ -39,7 +42,7 @@ const mapStateTopRops = state => {
   });
 };
 const mapDispatchToProps = dispatch => {
-  const {test} = getActions('test', ['test']);
+  const {test} = getActions(moduleName, ['test']);
   return bindActionCreators({
     test,
   }, dispatch);

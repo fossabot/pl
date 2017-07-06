@@ -10,8 +10,9 @@ export function getModuleConfRoutes (root) {
     if (!path) {
       return false;
     }
-    const regexp = new RegExp(`^/${root}/`, 'g');
-    return !!path.match(regexp);
+    const regexp = new RegExp(`^${root}/((\\w+)|(\\w+-\\w+)|(\\w+-\\w+-\\w+))(?!/)$`, 'g');
+    const r = path.match(regexp);
+    return !!r;
   });
 }
 
@@ -22,9 +23,9 @@ export function getModuleRoutes (root) {
   const r = filteredModulesConf.map((name, i) => {
     path = modules[name].path;
     component = modules[name].component;
-    return <Route key={i} exact path={path} component={component}/>;
+    return <Route key={i} path={path} component={component}/>;
   });
-  r.push(<Route key="root" path={`/${root}`} exact />);
+  r.push(<Route key="root" path={`${root}`} exact />);
   r.push(<Route key="nomatch" component={NoMatch}/>);
 
   return r;

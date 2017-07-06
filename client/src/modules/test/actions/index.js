@@ -1,13 +1,13 @@
+import settings from './../settings';
 import {prepActionTypes} from './../../../helpers/actions';
-require('es6-promise').polyfill();
-require("isomorphic-fetch");
-export const MODULE_NAME = 'test';
+
+const {moduleName} = settings;
 
 let typeNames = [
   'TEST_REQUESTED'
 ];
 
-export const TYPES = prepActionTypes(typeNames, MODULE_NAME);
+export const TYPES = prepActionTypes(typeNames, moduleName);
 
 export const test = (isWorking) => {
   return dispatch => {
