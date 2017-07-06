@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link, Switch} from 'react-router-dom';
 import {getModuleRoutes} from './../../helpers/routes';
+import { Button } from 'antd';
 
 class Map extends Component {
   constructor (props) {
@@ -15,7 +16,7 @@ class Map extends Component {
       <div>
         <div id="mapid"/>
         <h1>Map</h1>
-        <Link to="/map/test">test</Link>
+        <Button><Link to="/map/test">test</Link></Button>
         <Switch>
           {this.state.routes}
         </Switch>

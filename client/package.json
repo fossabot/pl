@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^2.11.2",
     "es6-promise": "^4.1.1",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",

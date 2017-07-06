@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import store, { history } from './store';
 import registerServiceWorker from './registerServiceWorker';
+import 'antd/dist/antd.css';
 import './index.css';
 
 const target = document.querySelector('#root');
