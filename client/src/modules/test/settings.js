@@ -1,5 +1,5 @@
 export default {
   moduleName: 'test',
-  path: `/map/test`,
+  routes: [`/map/test`, `/admin/test`],
   config: {}
 };

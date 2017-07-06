@@ -6,13 +6,13 @@ import {getModuleRoutes} from './../../../helpers/routes';
 import {Switch} from 'react-router-dom';
 import settings from './../settings';
 
-const {path, moduleName} = settings;
+const {moduleName} = settings;
 
 class Test extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      routes: getModuleRoutes(path)
+      routes: getModuleRoutes(props.match.path)
     }
   }
   componentDidMount () {

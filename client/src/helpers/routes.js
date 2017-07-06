@@ -4,25 +4,30 @@ import NoMatch from './../containers/no-match';
 import * as modules from './../modules/using';
 
 export function getModuleConfRoutes (root) {
-  return Object.keys(modules).filter(name => {
-    const moduleConf = modules[name];
-    const { path } = moduleConf;
-    if (!path) {
-      return false;
+  let results = [];
+  Object.keys(modules).forEach(name => {
+    const { routes, component } = modules[name];
+    if (routes.length) {
+      const fRoutes = routes.filter(route => {
+        const regexp = new RegExp(`^${root}/((\\w+)|(\\w+-\\w+)|(\\w+-\\w+-\\w+))(?!/)$`, 'g');
+        return !!route.match(regexp);
+      });
+      const paths = fRoutes.map(fRoute => {
+        return {
+          path: fRoute,
+          component
+        }
+      });
+      results = [...results, ...paths]
     }
-    const regexp = new RegExp(`^${root}/((\\w+)|(\\w+-\\w+)|(\\w+-\\w+-\\w+))(?!/)$`, 'g');
-    const r = path.match(regexp);
-    return !!r;
   });
+  return results;
 }
 
 export function getModuleRoutes (root) {
-  const filteredModulesConf = getModuleConfRoutes(root);
-  let path = '';
-  let component = <div>DEFAULT</div>;
-  const r = filteredModulesConf.map((name, i) => {
-    path = modules[name].path;
-    component = modules[name].component;
+  const filteredModulesConf = getModuleConfRoutes(root) || [];
+  const r = filteredModulesConf.map((routeInfo, i) => {
+    const {path, component}  = routeInfo;
     return <Route key={i} path={path} component={component}/>;
   });
   r.push(<Route key="root" path={`${root}`} exact />);

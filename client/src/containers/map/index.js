@@ -11,14 +11,16 @@ class Map extends Component {
   }
 
   render () {
-    return (<div>
-      <div id="mapid"/>
-      <h1>Map</h1>
-      <Link to="/map/test">test</Link>
-      <Switch>
-        {this.state.routes}
-      </Switch>
-    </div>);
+    return (
+      <div>
+        <div id="mapid"/>
+        <h1>Map</h1>
+        <Link to="/map/test">test</Link>
+        <Switch>
+          {this.state.routes}
+        </Switch>
+      </div>
+    );
   }
 }
 
