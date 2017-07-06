@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import {combineReducers} from 'redux-immutablejs';
 import {routerReducer} from 'react-router-redux';
 import * as modules from './../modules/using';
 import test2 from './test2';
@@ -7,6 +7,7 @@ export const commonList = {
   test2,
 };
 
+//TODO переделать!
 export const modulesList = Object.keys(modules).reduce((v, n) => {
   v[n] = modules[n];
   return v;

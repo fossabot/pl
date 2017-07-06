@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {createSelector} from 'reselect';
 import {getActions} from './../../../actions';
 import {getModuleRoutes} from './../../../helpers/routes';
 import {Switch} from 'react-router-dom';
@@ -23,11 +24,14 @@ class Test extends Component {
     return (<div>
       <div>
         TEST!
-        {props.isWorking ? <div>Работает</div> : <div />}
+        {props.test.get('isFetching') ? <div>Выполняется запрос..</div> : <div />}
         <button onClick={() => {
-          props.test(props.isWorking);
-        }}>fetch
+          props.getTest();
+        }}>Обновить данные
         </button>
+        <div>
+          {JSON.stringify(props.test.get('data'))}
+        </div>
       </div>
       <Switch>
         {this.state.routes}
@@ -36,15 +40,14 @@ class Test extends Component {
   }
 }
 
-const mapStateTopRops = state => {
-  return ({
-    isWorking: state.test.isWorking,
-  });
-};
+const mapStateTopRops = createSelector(
+  state => state.get('test'),
+  (test) => ({test})
+);
 const mapDispatchToProps = dispatch => {
-  const {test} = getActions(moduleName, ['test']);
+  const {getTest} = getActions(moduleName, ['getTest']);
   return bindActionCreators({
-    test,
+    getTest,
   }, dispatch);
 };
 
