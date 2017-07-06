@@ -1,7 +1,8 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import {Route, Link, Switch, Redirect} from 'react-router-dom';
 import Map from '../map';
 import Admin from '../admin';
+import NoMatch from '../no-match';
 
 export default () => (
   <div>
@@ -11,8 +12,12 @@ export default () => (
       <Link to="/admin">admin</Link>
     </header>
     <main>
-      <Route path="/map" component={Map} />
-      <Route path="/admin" component={Admin} />
+      <Switch>
+        <Redirect exact from="/" to="/map"/>
+        <Route path="/map" component={Map}/>
+        <Route path="/admin" component={Admin}/>
+        <Route component={NoMatch}/>
+      </Switch>
     </main>
   </div>
 )

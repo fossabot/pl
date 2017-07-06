@@ -8,17 +8,21 @@ export const commonList = {
 };
 
 export const modulesList = Object.keys(modules).reduce((v, n) => {
-  if (modules[n].hasOwnProperty('reducers')) {
-    v[n] = modules[n].reducers;
-  }
+  v[n] = modules[n];
   return v;
 }, {});
 
-checkUniqNames(commonList, modulesList);
+export const modulesReducersList = Object.keys(modulesList).reduce((v, n) => {
+  if (modulesList[n].hasOwnProperty('reducers')) {
+    v[n] = modulesList[n].reducers;
+  }
+  return v;
+}, {});
+checkUniqNames(commonList, modulesReducersList);
 
 export const list = {
   ...commonList,
-  ...modulesList,
+  ...modulesReducersList,
 };
 
 export default combineReducers({

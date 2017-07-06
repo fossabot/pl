@@ -1,6 +1,13 @@
+import {prepActionTypes} from './../../../helpers/actions';
 require('es6-promise').polyfill();
 require("isomorphic-fetch");
-export const TEST_REQUESTED = 'test/TEST_REQUESTED';
+export const MODULE_NAME = 'test';
+
+let typeNames = [
+  'TEST_REQUESTED'
+];
+
+export const TYPES = prepActionTypes(typeNames, MODULE_NAME);
 
 export const test = (isWorking) => {
   return dispatch => {
@@ -22,7 +29,7 @@ export const test = (isWorking) => {
       .then(resp => {
         const {isWorking} = resp;
         dispatch({
-          type: TEST_REQUESTED,
+          type: TYPES.TEST_REQUESTED,
           isWorking
         });
       })

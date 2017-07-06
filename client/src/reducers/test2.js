@@ -1,5 +1,5 @@
-import {getActions} from './../actions';
-const {TEST_REQUESTED2} = getActions('test2');
+import {TYPES} from './../actions/test2';
+const {TEST_REQUESTED2} = TYPES;
 
 const initialState = {
   isWorking: false,

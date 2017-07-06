@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-import {getRoutes} from './../../routes';
-const routes = getRoutes('map');
+import {Link, Switch} from 'react-router-dom';
+import {getModuleRoutes} from './../../helpers/routes';
+const routes = getModuleRoutes('map');
+
 class Map extends Component {
   componentDidMount() {
     console.log();
@@ -11,7 +12,9 @@ class Map extends Component {
       <div id="mapid"/>
       <h1>Map</h1>
       <Link to="/map/test">test</Link>
-      {routes}
+      <Switch>
+        {routes}
+      </Switch>
     </div>);
   }
 }
