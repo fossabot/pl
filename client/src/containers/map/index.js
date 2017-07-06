@@ -16,7 +16,7 @@ class Map extends Component {
       <div>
         <div id="mapid"/>
         <h1>Map</h1>
-        <Button><Link to="/map/test">test</Link></Button>
+        <Button type="primary"><Link to="/map/test">TEST</Link></Button>
         <Switch>
           {this.state.routes}
         </Switch>
