@@ -30,17 +30,34 @@ export default class SnapToPositionExample extends Component {
     window.addEventListener("resize", this.onWindowResize.bind(this));
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.handleDrag(this.state.prevSize);
   }
-  componentWillReceiveProps(nextProps) {
-    if (this.props.isOpen !== nextProps.rightSplitPane.get('isOpen')) {
-      // TODO
-      console.log();
+
+  componentWillReceiveProps (nextProps) {
+    const newStateIsOpen = nextProps.rightSplitPane.get('isOpen');
+    if (this.state.isOpen !== newStateIsOpen) {
+      this.toggleRightPane(newStateIsOpen);
     }
   }
+
+  toggleRightPane (isOpen) {
+    let size = this.state.size;
+    if (!isOpen) {
+      size = this.gw(100);
+    } else {
+      size = this.state.prevSize;
+    }
+    this.setState({
+      isOpen,
+      size
+    });
+  }
+
   onWindowResize (e) {
-    this.handleDrag(this.state.prevSize);
+    if (this.state.isOpen) {
+      this.handleDrag(this.state.prevSize);
+    }
   }
 
   handleDragStart () {
@@ -53,9 +70,13 @@ export default class SnapToPositionExample extends Component {
     this.setState({
       dragging: false,
     });
-    setTimeout(() => {
-      this.setState({ size: undefined });
-    }, 0);
+    if (this.state.isOpen) {
+      setTimeout(() => {
+        this.setState({ size: undefined });
+      }, 0);
+    } else {
+      this.setState({ size: this.gw(100) });
+    }
   }
 
   gw (percent) {
@@ -67,29 +88,30 @@ export default class SnapToPositionExample extends Component {
   }
 
   handleDrag (width) {
-    const gw = this.gw;
-    const {
-      minWidthPerc,
-      maxWidthPerc
-    } = this.state;
-    if (width >= gw(maxWidthPerc)) {
-      this.setState({ size: gw(maxWidthPerc), prevSize: width });
-    } else if (width <= gw(minWidthPerc)) {
-      this.setState({ size: gw(minWidthPerc), prevSize: width });
-    } else {
-      this.setState({ size: undefined, prevSize: width });
+    if (this.state.isOpen) {
+      const gw = this.gw;
+      const {
+        minWidthPerc,
+        maxWidthPerc
+      } = this.state;
+      if (width >= gw(maxWidthPerc)) {
+        this.setState({ size: gw(maxWidthPerc), prevSize: width });
+      } else if (width <= gw(minWidthPerc)) {
+        this.setState({ size: gw(minWidthPerc), prevSize: width });
+      } else {
+        this.setState({ size: undefined, prevSize: width });
+      }
     }
   }
 
   render () {
-    const { isOpen, LeftSide, RightSide } = this.props;
-
+    const { LeftSide, RightSide } = this.props;
     return (
       <div style={{ height: '100%' }}>
         <SplitPane
           pane1Style={{ width: '100%', height: '100%' }}
           pane2Style={{ width: '100%', height: '100%', display: this.state.isOpen ? 'block' : 'none' }}
-          size={this.state.dragging ? undefined : this.state.size}
+          size={(this.state.dragging && this.state.isOpen) ? undefined : this.state.size}
           onChange={this.handleDrag}
           onDragStarted={this.handleDragStart}
           onDragFinished={this.handleDragEnd}

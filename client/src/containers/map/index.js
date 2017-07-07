@@ -19,8 +19,7 @@ class Map extends Component {
 
   render (props) {
     const {rightSplitPane, toggleRightSplitPane} = this.props;
-    const rightSplitPaneWidth = rightSplitPane.get('isOpen');
-    const rightSplitPaneIsOpen = rightSplitPaneWidth > 1;
+    const rightSplitPaneIsOpen = rightSplitPane.get('isOpen');
 
     const LeftSide = (
       <div>
