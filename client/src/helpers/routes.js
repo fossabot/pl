@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route} from 'react-router-dom';
-import NoMatch from './../containers/no-match';
+import NoMatch from './../base/noMatch';
 import * as modules from './../modules/using';
 
 export function getModuleConfRoutes (root) {
@@ -9,7 +9,14 @@ export function getModuleConfRoutes (root) {
     const { routes, component } = modules[name];
     if (routes.length) {
       const fRoutes = routes.filter(route => {
-        const regexp = new RegExp(`^${root}/((\\w+)|(\\w+-\\w+)|(\\w+-\\w+-\\w+))(?!/)$`, 'g');
+        if (!root) {
+          return false;
+        }
+        let sl = '';
+        if (root.slice(-1) !== '/') {
+          sl = '/';
+        }
+        const regexp = new RegExp(`^${root + sl}((\\w+)|(\\w+-\\w+)|(\\w+-\\w+-\\w+))(?!/)$`, 'g');
         return !!route.match(regexp);
       });
       const paths = fRoutes.map(fRoute => {

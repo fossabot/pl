@@ -2,21 +2,21 @@ import React, {Component} from 'react';
 import { Link, Switch } from 'react-router-dom';
 import {getModuleRoutes} from './../../helpers/routes';
 
-class Admin extends Component {
+class Template extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      routes: getModuleRoutes('/admin')
+      routes: getModuleRoutes('/template')
     };
   }
 
   render () {
     return (
       <div>
-        <h1>Admin pane</h1>
-        <Link to="/map">map</Link>
+        <h1>Шаблон пример</h1>
+        <Link to="/">На главную</Link>
         <br />
-        <Link to={`${this.props.match.path}/test`}>test</Link>
+        <Link to={`/administration`}>Администрирование</Link>
         <Switch>
           {this.state.routes}
         </Switch>
@@ -25,4 +25,4 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default Template;

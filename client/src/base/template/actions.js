@@ -1,4 +1,4 @@
-import {prepActionTypes} from './../helpers/actions';
+import {prepActionTypes} from './../../helpers/actions';
 export const MODULE_NAME = 'test2';
 
 let typeNames = [

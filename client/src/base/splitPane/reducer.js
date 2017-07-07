@@ -1,9 +1,9 @@
 import {fromJS} from 'immutable';
-import {TYPES} from './../actions/rightSplitPane';
+import {TYPES} from './actions';
 const {
-  SHOW_RIGHT_SPLIT_PANE,
-  HIDE_RIGHT_SPLIT_PANE,
-  TOGGLE_RIGHT_SPLIT_PANE
+  SHOW_SPLIT_PANE,
+  HIDE_SPLIT_PANE,
+  TOGGLE_SPLIT_PANE
 } = TYPES;
 
 const initialState = fromJS({
@@ -14,11 +14,11 @@ const initialState = fromJS({
 });
 export default function (state = initialState, action) {
   switch (action.type) {
-    case TOGGLE_RIGHT_SPLIT_PANE:
+    case TOGGLE_SPLIT_PANE:
       return state.set('isOpen', !state.get('isOpen'));
-    case SHOW_RIGHT_SPLIT_PANE:
+    case SHOW_SPLIT_PANE:
       return state.set('isOpen', true);
-    case HIDE_RIGHT_SPLIT_PANE:
+    case HIDE_SPLIT_PANE:
       return state.set('isOpen', false);
     default:
       return state;

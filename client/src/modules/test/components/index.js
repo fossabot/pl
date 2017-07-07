@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {createSelector} from 'reselect';
-import {getActions} from './../../../actions';
+import {getActions} from './../../../base/actions';
 import {getModuleRoutes} from './../../../helpers/routes';
 import {Switch} from 'react-router-dom';
 import {push} from 'react-router-redux';

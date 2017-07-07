@@ -12,7 +12,7 @@ export default class SnapToPositionExample extends Component {
       minWidthPerc,
       maxWidthPerc,
       isOpen
-    } = this.props.rightSplitPane.toJS();
+    } = this.props.splitPane.toJS();
     const size = this.gw(defaultWidthPerc);
     this.state = {
       size,
@@ -35,7 +35,7 @@ export default class SnapToPositionExample extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const newStateIsOpen = nextProps.rightSplitPane.get('isOpen');
+    const newStateIsOpen = nextProps.splitPane.get('isOpen');
     if (this.state.isOpen !== newStateIsOpen) {
       this.toggleRightPane(newStateIsOpen);
     }

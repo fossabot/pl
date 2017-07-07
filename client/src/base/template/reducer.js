@@ -1,5 +1,5 @@
 import {Map, fromJS} from 'immutable';
-import {TYPES} from './../actions/test2';
+import {TYPES} from './actions';
 const {
   GET_TEST,
   GET_TEST_FAILED,

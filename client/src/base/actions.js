@@ -1,14 +1,14 @@
 import * as modules from './../modules/using';
-import * as test2 from './test2';
-import * as rightSplitPane from './rightSplitPane';
+import * as template from './template/actions';
+import * as splitPane from './splitPane/actions';
 import {
   checkAvailabilityActions,
   checkAvailabilityActionTypes
 } from './../helpers/actions';
 
 let commonList = {
-  test2,
-  rightSplitPane,
+  template,
+  splitPane,
 };
 
 export function getActionTypes (moduleName, actionTypeNames = []) {

@@ -1,12 +1,12 @@
 import {combineReducers} from 'redux-immutablejs';
 import {routerReducer} from 'react-router-redux';
 import * as modules from './../modules/using';
-import test2 from './test2';
-import rightSplitPane from './rightSplitPane';
+import template from './template/reducer';
+import splitPane from './splitPane/reducer';
 
 export const commonList = {
-  test2,
-  rightSplitPane,
+  template,
+  splitPane,
 };
 
 //TODO переделать!
