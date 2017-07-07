@@ -5,6 +5,7 @@ import {createSelector} from 'reselect';
 import {getActions} from './../../../actions';
 import {getModuleRoutes} from './../../../helpers/routes';
 import {Switch} from 'react-router-dom';
+import {push} from 'react-router-redux';
 import settings from './../settings';
 
 const {moduleName} = settings;
@@ -29,6 +30,10 @@ class Test extends Component {
           props.getTest();
         }}>Обновить данные
         </button>
+        <button onClick={() => {
+          props.goToMain('/map');
+        }}>Перейти в main
+        </button>
         <div>
           {JSON.stringify(props.test.get('data'))}
         </div>
@@ -48,6 +53,7 @@ const mapDispatchToProps = dispatch => {
   const {getTest} = getActions(moduleName, ['getTest']);
   return bindActionCreators({
     getTest,
+    goToMain: (route) => push(route)
   }, dispatch);
 };
 

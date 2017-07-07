@@ -3,14 +3,10 @@ import {Route, Link, Switch, Redirect} from 'react-router-dom';
 import Map from '../map';
 import Admin from '../admin';
 import NoMatch from '../no-match';
+import './../styles/app.css';
 
 export default () => (
   <div>
-    <header>
-      APP
-      <Link to="/map">map</Link>
-      <Link to="/admin">admin</Link>
-    </header>
     <main>
       <Switch>
         <Redirect exact from="/" to="/map"/>

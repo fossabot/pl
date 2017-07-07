@@ -1,5 +1,6 @@
 import * as modules from './../modules/using';
 import * as test2 from './test2';
+import * as rightSplitPane from './rightSplitPane';
 import {
   checkAvailabilityActions,
   checkAvailabilityActionTypes
@@ -7,6 +8,7 @@ import {
 
 let commonList = {
   test2,
+  rightSplitPane,
 };
 
 export function getActionTypes (moduleName, actionTypeNames = []) {
@@ -27,7 +29,7 @@ export function getActions (moduleName, actionNames = []) {
 
 function getActionsByModuleName (moduleName) {
   if (commonList.hasOwnProperty(moduleName)) {
-    return commonList[moduleName].actions;
+    return commonList[moduleName];
   }
 
   if (Object.keys(modules).indexOf(moduleName) === 0) {
