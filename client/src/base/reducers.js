@@ -3,10 +3,12 @@ import {routerReducer} from 'react-router-redux';
 import * as modules from './../modules/using';
 import template from './template/reducer';
 import splitPane from './splitPane/reducer';
+import topButtonsGroup from './topButtonsGroup/reducer';
 
 export const commonList = {
   template,
   splitPane,
+  topButtonsGroup,
 };
 
 //TODO переделать!

@@ -31,7 +31,7 @@ class Test extends Component {
         }}>Обновить данные
         </button>
         <button onClick={() => {
-          props.goToMain('/map');
+          props.goTo('/map');
         }}>Перейти в main
         </button>
         <div>
@@ -53,7 +53,7 @@ const mapDispatchToProps = dispatch => {
   const {getTest} = getActions(moduleName, ['getTest']);
   return bindActionCreators({
     getTest,
-    goToMain: (route) => push(route)
+    goTo: (route) => push(route)
   }, dispatch);
 };
 

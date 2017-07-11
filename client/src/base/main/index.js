@@ -8,8 +8,9 @@ import {Button} from 'antd';
 import {push} from 'react-router-redux';
 import {createSelector} from 'reselect';
 import SplitPane from './../splitPane';
+import TopButtonsGroup from './../topButtonsGroup';
 
-class Map extends Component {
+class Main extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -27,13 +28,14 @@ class Map extends Component {
         <Button type="primary" onClick={() => {
           toggleSplitPane(!splitPaneIsOpen);
         }}>Правая панель</Button>
+        <TopButtonsGroup />
       </div>
     );
 
     const RightSide = (
       <div>
-        <h1>Map</h1>
-        <Button type="primary"><Link to="/test">TEST</Link></Button>
+        <h1>Main</h1>
+        <Button type="primary"><Link to="/test">Открыть модуль тест</Link></Button>
         <Switch>
           {this.state.routes}
         </Switch>
@@ -64,4 +66,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateTopRops,
   mapDispatchToProps,
-)(Map);
+)(Main);

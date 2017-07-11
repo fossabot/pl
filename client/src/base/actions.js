@@ -1,6 +1,7 @@
 import * as modules from './../modules/using';
 import * as template from './template/actions';
 import * as splitPane from './splitPane/actions';
+import * as topButtonsGroup from './topButtonsGroup/actions';
 import {
   checkAvailabilityActions,
   checkAvailabilityActionTypes
@@ -9,6 +10,7 @@ import {
 let commonList = {
   template,
   splitPane,
+  topButtonsGroup,
 };
 
 export function getActionTypes (moduleName, actionTypeNames = []) {

@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import SplitPane from 'react-split-pane';
 
-export default class SnapToPositionExample extends Component {
+export default class Pane extends Component {
 
   constructor (props) {
     super(props);
@@ -13,6 +13,7 @@ export default class SnapToPositionExample extends Component {
       maxWidthPerc,
       isOpen
     } = this.props.splitPane.toJS();
+    // TODO хранить size в процентах
     const size = this.gw(defaultWidthPerc);
     this.state = {
       size,

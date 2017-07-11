@@ -1,1 +1,2 @@
-@import "./split-pane.css";
+@import "./../splitPane/style.css";
+@import "./../topButtonsGroup/style.css";
