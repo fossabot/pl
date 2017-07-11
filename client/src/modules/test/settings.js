@@ -1,5 +1,5 @@
 import Button from './components/button';
-import {topButtonsGroup} from './../../helpers/panes';
+import {list} from './../../helpers/panes';
 export default {
   moduleName: 'test',
   routes: [`/test`, `/administration/test`],
@@ -9,7 +9,7 @@ export default {
     buttons: [
       {
         createType: 'link',
-        pane: topButtonsGroup,
+        pane: list.topButtonsGroup,
         icon: 'download',
         accessRoles: ['*'],
         link: {
@@ -24,7 +24,7 @@ export default {
         createType: 'component',
         accessRoles: ['*'],
         component: Button,
-        pane: topButtonsGroup,
+        pane: list.topButtonsGroup,
         tooltip: 'открыть тестовый модуль'
       }
     ]

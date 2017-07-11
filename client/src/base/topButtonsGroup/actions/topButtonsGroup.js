@@ -1,4 +1,4 @@
-import {prepActionTypes} from './../../helpers/actions';
+import {prepActionTypes} from './../../../helpers/actions';
 export const MODULE_NAME = 'topButtonsGroup';
 
 let typeNames = [
@@ -38,3 +38,12 @@ export function remove () {
     });
   }
 }
+
+export default {
+  MODULE_NAME,
+  TYPES,
+  show,
+  hide,
+  add,
+  remove,
+};

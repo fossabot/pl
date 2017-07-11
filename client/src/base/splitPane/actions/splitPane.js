@@ -1,4 +1,4 @@
-import {prepActionTypes} from './../../helpers/actions';
+import {prepActionTypes} from './../../../helpers/actions';
 export const MODULE_NAME = 'splitPane';
 
 let typeNames = [
@@ -30,3 +30,11 @@ export function toggleSplitPane () {
     });
   }
 }
+
+export default {
+  MODULE_NAME,
+  TYPES,
+  showSplitPane,
+  hideSplitPane,
+  toggleSplitPane,
+};

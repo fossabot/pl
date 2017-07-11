@@ -25,7 +25,7 @@ class TopButtonsGroup extends Component {
   }
 
   prepButtons () {
-    return this.props.buttonsConf.reduce((v, n, i) => {
+    return Object.keys(this.props.buttonsConf).reduce((v, n, i) => {
       switch (n.createType) {
         case 'link':
           v.push(this.linkButton(n, i));

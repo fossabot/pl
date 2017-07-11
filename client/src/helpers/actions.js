@@ -1,8 +1,23 @@
+
+let actionsModules;
+
 export function prepActionTypes(typeNames = [], moduleName = '') {
   return typeNames.reduce((v, n) => {
     v[n] = `${moduleName}/${n}`;
     return v;
   }, {});
+}
+
+export function getActionsByModuleName (moduleName) {
+  var {getModulesProp} = require('./modules');
+  if (!actionsModules) {
+    actionsModules = getModulesProp('actions');
+  }
+  if (actionsModules.hasOwnProperty(moduleName)) {
+    return actionsModules[moduleName];
+  }
+  console.log(new Error(`getActionsByModuleName() => err, module ${moduleName} not found.`));
+  return undefined;
 }
 
 export function checkAvailabilityActions (actions = {}, actionNames) {
@@ -12,7 +27,7 @@ export function checkAvailabilityActions (actions = {}, actionNames) {
     } else {
       v[n] = () => {
         return dispatch => {
-          console.log('Action not found!');
+          console.log(`Action ${n} not found!`);
           // TODO dispatch warning!
         }
       }
@@ -37,3 +52,4 @@ export function checkAvailabilityActionTypes (actions = { TYPES: {} }, actionTyp
     return v;
   }, {});
 }
+
