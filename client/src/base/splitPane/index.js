@@ -47,7 +47,12 @@ export default class Pane extends Component {
     if (!isOpen) {
       size = this.gw(100);
     } else {
-      size = this.state.prevSize;
+      const windowWidth = getWindowWidth();
+      if (windowWidth < this.state.prevSize) {
+        size = this.gw(this.state.maxWidthPerc);
+      } else {
+        size = this.state.prevSize;
+      }
     }
     this.setState({
       isOpen,
@@ -58,6 +63,8 @@ export default class Pane extends Component {
   onWindowResize (e) {
     if (this.state.isOpen) {
       this.handleDrag(this.state.prevSize);
+    } else {
+      this.setState({ size: this.gw(100) });
     }
   }
 
@@ -81,11 +88,8 @@ export default class Pane extends Component {
   }
 
   gw (percent) {
-    const width = window.innerWidth
-      || document.documentElement.clientWidth
-      || document.body.clientWidth;
-    const pr = (width / 100) * percent;
-    return pr;
+    const width = getWindowWidth();
+    return (width / 100) * percent;
   }
 
   handleDrag (width) {
@@ -127,4 +131,9 @@ export default class Pane extends Component {
       </div>
     );
   }
+}
+function getWindowWidth () {
+  return window.innerWidth
+    || document.documentElement.clientWidth
+    || document.body.clientWidth;
 }
