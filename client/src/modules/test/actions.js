@@ -1,7 +1,7 @@
-import settings from './settings';
+import config from './config';
 import {prepActionTypes} from './../../helpers/actions';
 
-const { moduleName } = settings;
+const { moduleName } = config;
 
 let typeNames = [
   'GET_TEST',

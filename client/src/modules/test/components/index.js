@@ -6,9 +6,9 @@ import {getActions} from './../../../base/actions';
 import {getModuleRoutes} from './../../../helpers/routes';
 import {Switch} from 'react-router-dom';
 import {push} from 'react-router-redux';
-import settings from './../settings';
+import config from './../config';
 
-const {moduleName} = settings;
+const {moduleName} = config;
 
 class Test extends Component {
   constructor (props) {

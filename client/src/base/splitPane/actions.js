@@ -1,5 +1,5 @@
 import {prepActionTypes} from './../../helpers/actions';
-export const MODULE_NAME = 'splitPane';
+import config from './config';
 
 let typeNames = [
   'TOGGLE_SPLIT_PANE',
@@ -7,7 +7,7 @@ let typeNames = [
   'HIDE_SPLIT_PANE'
 ];
 
-export const TYPES = prepActionTypes(typeNames, MODULE_NAME);
+export const TYPES = prepActionTypes(typeNames, config.moduleName);
 
 export function showSplitPane () {
   return dispatch => {
@@ -32,7 +32,6 @@ export function toggleSplitPane () {
 }
 
 export default {
-  MODULE_NAME,
   TYPES,
   showSplitPane,
   hideSplitPane,

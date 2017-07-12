@@ -1,5 +1,5 @@
 import {prepActionTypes} from './../../helpers/actions';
-export const MODULE_NAME = 'test2';
+import config from './config';
 
 let typeNames = [
   'GET_TEST',
@@ -7,7 +7,7 @@ let typeNames = [
   'GET_TEST_COMPLETE',
 ];
 
-export const TYPES = prepActionTypes(typeNames, MODULE_NAME);
+export const TYPES = prepActionTypes(typeNames, config.moduleName);
 
 export const getTest = () => {
   return dispatch => {
@@ -37,7 +37,6 @@ export const getTestComplete = (data) => {
 };
 
 export default {
-  MODULE_NAME,
   TYPES,
   getTest,
   getTestFailed,

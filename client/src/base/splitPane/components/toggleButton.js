@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Tooltip} from 'antd';
 import {connect} from 'react-redux';
 import {createSelector} from 'reselect';
-import {getActions} from './../actions';
+import {getActions} from './../../actions';
 import {bindActionCreators} from 'redux';
 
 class OpenButton extends Component {

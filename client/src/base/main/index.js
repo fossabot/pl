@@ -7,8 +7,8 @@ import {getActions} from './../../base/actions';
 import {Button} from 'antd';
 import {push} from 'react-router-redux';
 import {createSelector} from 'reselect';
-import SplitPane from './../splitPane';
-import TopButtonsGroup from './../topButtonsGroup';
+import SplitPane from './../splitPane/components';
+import TopButtonsGroup from './../topButtonsGroup/components';
 
 class Main extends Component {
   constructor (props) {

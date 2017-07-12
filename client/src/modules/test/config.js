@@ -1,5 +1,6 @@
 import Button from './components/button';
 import {list} from './../../helpers/panes';
+
 export default {
   moduleName: 'test',
   routes: [`/test`, `/administration/test`],
