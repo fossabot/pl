@@ -18,6 +18,10 @@ class Main extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.initTopButtonsGroup();
+  }
+
   render (props) {
     const {splitPane, toggleSplitPane} = this.props;
     const splitPaneIsOpen = splitPane.get('isOpen');
@@ -57,10 +61,12 @@ const mapStateTopRops = createSelector(
 const mapDispatchToProps = dispatch => {
   const {getTest} = getActions('test', ['getTest']);
   const {toggleSplitPane} = getActions('splitPane', ['toggleSplitPane']);
+  const topButtonsGroupActions = getActions('topButtonsGroup', ['init']);
   return bindActionCreators({
     getTest,
     toggleSplitPane,
-    goToMain: (route) => push(route)
+    initTopButtonsGroup: topButtonsGroupActions.init,
+    goToMain: (route) => push(route),
   }, dispatch);
 };
 export default connect(

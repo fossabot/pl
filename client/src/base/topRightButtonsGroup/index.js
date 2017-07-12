@@ -6,13 +6,13 @@ import {push} from 'react-router-redux';
 import {Button, Tooltip} from 'antd';
 const ButtonGroup = Button.Group;
 
-class TopButtonsGroup extends Component {
+class TopRightButtonsGroup extends Component {
 
-  linkButton (conf, key) {
+  linkButton (conf, i) {
     const { icon, link } = conf;
     const goTo = this.props.goTo;
     return (
-      <Tooltip key={key} placement="bottom" title={link.tooltip}>
+      <Tooltip key={i} placement="bottom" title={link.tooltip}>
         <Button type="primary"
                 icon={icon}
                 size={'default'}
@@ -25,28 +25,20 @@ class TopButtonsGroup extends Component {
   }
 
   prepButtons () {
-    const buttonsConf = this.props.buttonsConf || {};
-    if (Object.keys(buttonsConf).length > 0) {
-      return Object.keys(buttonsConf).reduce((v, n, i) => {
-        Object.keys(buttonsConf[n]).forEach(buttonConfInd => {
-          const conf = buttonsConf[n][buttonConfInd];
-          const key = `${i}-${buttonConfInd}`;
-          switch (conf.createType) {
-            case 'link':
-              v.push(this.linkButton(conf, key));
-              break;
-            case 'component':
-              v.push(React.createElement(conf.component, { key, ...n}));
-              break;
-            default:
-              console.log(`buttonConf createType [${conf.createType}] not supported!`);
-              break;
-          }
-        });
-        return v;
-      }, []);
-    }
-    return [];
+    return Object.keys(this.props.buttonsConf).reduce((v, n, i) => {
+      switch (n.createType) {
+        case 'link':
+          v.push(this.linkButton(n, i));
+          break;
+        case 'component':
+          v.push(React.createElement(n.component, { key: i, ...n}));
+          break;
+        default:
+          console.log(`buttonConf createType [${n.createType}] not supported!`);
+          break;
+      }
+      return v;
+    }, []);
   }
 
   render () {
@@ -61,7 +53,7 @@ class TopButtonsGroup extends Component {
 }
 
 const mapStateTopRops = createSelector(
-  state => state.get('topButtonsGroup').get('buttonsConf').toJS(),
+  state => state.get('topRightButtonsGroup').get('buttonsConf').toJS(),
   (buttonsConf) => ({ buttonsConf })
 );
 const mapDispatchToProps = dispatch => {
@@ -73,4 +65,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateTopRops,
   mapDispatchToProps,
-)(TopButtonsGroup);
+)(TopRightButtonsGroup);

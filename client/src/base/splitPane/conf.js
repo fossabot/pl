@@ -1,11 +1,11 @@
-import * as reducers from './reducers';
-import * as actions from './actions';
+import reducer from './reducer';
+import actions from './actions';
 import {list} from './../../helpers/panes';
 import toggleButton from './toggleButton';
 
 export default {
   ...{
-    reducers,
+    reducer,
     actions,
     config: {
       buttons: [

@@ -1,7 +1,8 @@
-import {prepActionTypes} from './../../../helpers/actions';
+import {prepActionTypes} from './../../helpers/actions';
 export const MODULE_NAME = 'topButtonsGroup';
 
 let typeNames = [
+  'INIT',
   'SHOW',
   'HIDE',
   'ADD',
@@ -10,6 +11,13 @@ let typeNames = [
 
 export const TYPES = prepActionTypes(typeNames, MODULE_NAME);
 
+export function init () {
+  return dispatch => {
+    dispatch({
+      type: TYPES.INIT
+    });
+  }
+}
 export function show () {
   return dispatch => {
     dispatch({
@@ -42,6 +50,7 @@ export function remove () {
 export default {
   MODULE_NAME,
   TYPES,
+  init,
   show,
   hide,
   add,

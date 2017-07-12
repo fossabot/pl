@@ -12,6 +12,7 @@ export function getModules () {
         import('./../base/modules-conf')
           .then((baseMs) => {
             baseModules = baseMs;
+            checkUniqNames(modules, baseModules);
             modulesList = { ...usingModules, ...baseModules };
             return resolve(modulesList);
           });
@@ -20,17 +21,11 @@ export function getModules () {
 }
 
 export function getModulesProp (propName) {
-
-  const baseModulesProps = getProp(baseModules, propName);
-  const modulesProps = getProp(modules, propName);
-
-  checkUniqNames(modules, baseModules);
-  return { ...modulesProps, ...baseModulesProps };
-}
-
-function getProp (modules, propName) {
-  return Object.keys(modules).reduce((v, n) => {
-    v = { ...v, ...valBy(propName, modules[n]) };
+  return Object.keys(modulesList).reduce((v, n) => {
+    const val = valBy(propName, modulesList[n]);
+    if (val) {
+      v[n] = valBy(propName, modulesList[n]);
+    }
     return v;
   }, {});
 }

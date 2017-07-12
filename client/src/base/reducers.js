@@ -4,5 +4,5 @@ import {getModulesProp} from './../helpers/modules';
 
 export default combineReducers({
   routing: routerReducer,
-  ...getModulesProp('reducers')
+  ...getModulesProp('reducer')
 });

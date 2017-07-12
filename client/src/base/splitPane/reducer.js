@@ -1,11 +1,11 @@
 import {fromJS} from 'immutable';
-import {splitPane} from './../actions';
+import {TYPES} from './actions';
 
 const {
   SHOW_SPLIT_PANE,
   HIDE_SPLIT_PANE,
   TOGGLE_SPLIT_PANE
-} = splitPane.TYPES;
+} = TYPES;
 
 const initialState = fromJS({
   isOpen: true,

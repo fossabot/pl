@@ -1,10 +1,10 @@
 import {Map, fromJS} from 'immutable';
-import {template} from './../actions';
+import {TYPES} from './actions';
 const {
   GET_TEST,
   GET_TEST_FAILED,
   GET_TEST_COMPLETE
-} = template.TYPES;
+} = TYPES;
 
 const initialState = fromJS({
   isFetching: true,

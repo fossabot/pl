@@ -1,14 +1,14 @@
 import {fromJS} from 'immutable';
-import {topButtonsGroup} from './../actions';
-import {list, getButtonsConfByPaneName} from './../../../helpers/panes';
+import {TYPES} from './actions';
+import {list, getButtonsConfByPaneName} from './../../helpers/panes';
 
 const {
-  GET_INITIAL,
+  INIT,
   SHOW,
   HIDE,
   ADD,
   REMOVE
-} = topButtonsGroup.TYPES;
+} = TYPES;
 
 
 const initialState = fromJS({
@@ -17,8 +17,8 @@ const initialState = fromJS({
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case GET_INITIAL:
-      return state.set('buttonsConf', fromJS(getButtonsConfByPaneName(list.topButtonsGroup)));
+    case INIT:
+      return state.set('buttonsConf', fromJS(getButtonsConfByPaneName(list.topRightButtonsGroup)));
     case SHOW:
       return state.set('isOpen', !state.get('isOpen'));
     case HIDE:

@@ -1,5 +1,5 @@
-import settings from './../settings';
-import {prepActionTypes} from './../../../helpers/actions';
+import settings from './settings';
+import {prepActionTypes} from './../../helpers/actions';
 
 const { moduleName } = settings;
 
