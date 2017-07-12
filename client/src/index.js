@@ -4,7 +4,7 @@ function authSuccess() {
       return getModules()
         .then(() => {
           console.log(2);
-          require('./index2');
+          require('./Root');
         });
     });
 }
