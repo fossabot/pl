@@ -5,7 +5,7 @@ export default class extends Component {
   render () {
     return (
       <Tooltip placement="bottom" title={this.props.tooltip}>
-        <Button type="primary" icon="rocket" size={'default'} />
+        <Button type="primary" icon="smile-o" size={'default'} />
       </Tooltip>
     )
   }

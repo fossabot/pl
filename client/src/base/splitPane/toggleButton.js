@@ -7,9 +7,12 @@ import {bindActionCreators} from 'redux';
 
 class OpenButton extends Component {
   render () {
+    const {props} = this;
     return (
-      <Tooltip placement="bottom" title={this.props.tooltip}>
-        <Button type="primary" icon="rocket" size={'default'} />
+      <Tooltip placement="bottom" title={props.tooltip}>
+        <Button type="primary" icon="rocket" size={'default'} onClick={() => {
+          props.toggleSplitPane(props.splitPane.get('isOpen'));
+        }} />
       </Tooltip>
     )
   }

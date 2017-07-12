@@ -36,7 +36,7 @@ class TopButtonsGroup extends Component {
               v.push(this.linkButton(conf, key));
               break;
             case 'component':
-              v.push(React.createElement(conf.component, { key, ...n}));
+              v.push(React.createElement(conf.component, { key, ...conf}));
               break;
             default:
               console.log(`buttonConf createType [${conf.createType}] not supported!`);
