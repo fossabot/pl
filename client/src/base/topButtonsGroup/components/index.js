@@ -12,7 +12,7 @@ class TopButtonsGroup extends Component {
     const { icon, link } = conf;
     const goTo = this.props.goTo;
     return (
-      <Tooltip key={key} placement="bottom" title={link.tooltip}>
+      <Tooltip key={key} placement="bottomRight" title={link.tooltip}>
         <Button type="primary"
                 icon={icon}
                 size={'default'}

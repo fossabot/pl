@@ -8,5 +8,5 @@ export default {
     component,
     reducer,
     actions,
-  }, ... config
+  }, ...config
 };
