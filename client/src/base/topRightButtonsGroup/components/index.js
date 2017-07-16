@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {createSelector} from 'reselect';
 import {push} from 'react-router-redux';
 import {Button, Tooltip} from 'antd';
-const ButtonGroup = Button.Group;
 
 class TopRightButtonsGroup extends Component {
 
@@ -12,7 +11,7 @@ class TopRightButtonsGroup extends Component {
     const { icon, link } = conf;
     const goTo = this.props.goTo;
     return (
-      <Tooltip key={i} placement="bottom" title={link.tooltip}>
+      <Tooltip key={i} placement="left" title={link.tooltip}>
         <Button type="primary"
                 icon={icon}
                 size={'default'}
@@ -25,28 +24,34 @@ class TopRightButtonsGroup extends Component {
   }
 
   prepButtons () {
-    return Object.keys(this.props.buttonsConf).reduce((v, n, i) => {
-      switch (n.createType) {
-        case 'link':
-          v.push(this.linkButton(n, i));
-          break;
-        case 'component':
-          v.push(React.createElement(n.component, { key: i, ...n}));
-          break;
-        default:
-          console.log(`buttonConf createType [${n.createType}] not supported!`);
-          break;
-      }
-      return v;
-    }, []);
+    const buttonsConf = this.props.buttonsConf || {};
+    if (Object.keys(buttonsConf).length > 0) {
+      return Object.keys(buttonsConf).reduce((v, n, i) => {
+        Object.keys(buttonsConf[n]).forEach(buttonConfInd => {
+          const conf = buttonsConf[n][buttonConfInd];
+          const key = `${i}-${buttonConfInd}`;
+          switch (conf.createType) {
+            case 'link':
+              v.push(this.linkButton(conf, key));
+              break;
+            case 'component':
+              v.push(React.createElement(conf.component, { key, ...conf}));
+              break;
+            default:
+              console.log(`buttonConf createType [${conf.createType}] not supported!`);
+              break;
+          }
+        });
+        return v;
+      }, []);
+    }
+    return [];
   }
 
   render () {
     return (
-      <div className="TopButtonsGroup">
-        <ButtonGroup>
+      <div className="TopRightButtonsGroup">
           {this.prepButtons()}
-        </ButtonGroup>
       </div>
     )
   }

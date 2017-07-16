@@ -1,7 +1,8 @@
-.TopButtonsGroup {
+.TopRightButtonsGroup {
     position: absolute;
-    top: 15px;
+    top: 60px;
     right: 15px;
     text-align: center;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
 }

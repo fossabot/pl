@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Link, Switch} from 'react-router-dom';
+import {Switch} from 'react-router-dom';
 import {getModuleRoutes} from './../../helpers/routes';
 import {getActions} from './../../base/actions';
-import {Button} from 'antd';
+import {BackTop} from 'antd';
 import {push} from 'react-router-redux';
 import {createSelector} from 'reselect';
 import SplitPane from './../splitPane/components';
 import TopButtonsGroup from './../topButtonsGroup/components';
+import TopRightButtonsGroup from './../topRightButtonsGroup/components';
 
 class Main extends Component {
   constructor (props) {
@@ -20,26 +21,23 @@ class Main extends Component {
 
   componentDidMount() {
     this.props.initTopButtonsGroup();
+    this.props.initTopRightButtonsGroup();
   }
 
-  render (props) {
-    const {splitPane, toggleSplitPane} = this.props;
-    const splitPaneIsOpen = splitPane.get('isOpen');
+  render () {
+    const {splitPane} = this.props;
 
     const LeftSide = (
       <div>
         карта
-        <Button type="primary" onClick={() => {
-          toggleSplitPane(!splitPaneIsOpen);
-        }}>Правая панель</Button>
         <TopButtonsGroup />
+        <TopRightButtonsGroup />
       </div>
     );
 
     const RightSide = (
       <div>
-        <h1>Main</h1>
-        <Button type="primary"><Link to="/test">Открыть модуль тест</Link></Button>
+        <BackTop />
         <Switch>
           {this.state.routes}
         </Switch>
@@ -62,10 +60,12 @@ const mapDispatchToProps = dispatch => {
   const {getTest} = getActions('test', ['getTest']);
   const {toggleSplitPane} = getActions('splitPane', ['toggleSplitPane']);
   const topButtonsGroupActions = getActions('topButtonsGroup', ['init']);
+  const topRightButtonsGroupActions = getActions('topRightButtonsGroup', ['init']);
   return bindActionCreators({
     getTest,
     toggleSplitPane,
     initTopButtonsGroup: topButtonsGroupActions.init,
+    initTopRightButtonsGroup: topRightButtonsGroupActions.init,
     goToMain: (route) => push(route),
   }, dispatch);
 };

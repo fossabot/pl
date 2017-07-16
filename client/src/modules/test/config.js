@@ -10,7 +10,7 @@ export default {
     buttons: [
       {
         createType: 'link',
-        pane: list.topButtonsGroup,
+        pane: list.topRightButtonsGroup,
         icon: 'download',
         accessRoles: ['*'],
         link: {
@@ -25,7 +25,7 @@ export default {
         createType: 'component',
         accessRoles: ['*'],
         component: Button,
-        pane: list.topButtonsGroup,
+        pane: list.topRightButtonsGroup,
         tooltip: 'открыть тестовый модуль'
       }
     ]
