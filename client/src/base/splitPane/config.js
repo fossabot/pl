@@ -12,7 +12,8 @@ export default {
         accessRoles: ['*'],
         component: ToggleButton,
         pane: list.topButtonsGroup,
-        tooltip: 'открыть/скрыть правую панель'
+        tooltip: 'открыть/скрыть правую панель',
+        orderWeight: 1000
       }
     ]
   }

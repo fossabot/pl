@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {createSelector} from 'reselect';
 import {push} from 'react-router-redux';
 import {Button, Tooltip} from 'antd';
+import {prepConfs} from './../../../helpers/panes';
 const ButtonGroup = Button.Group;
 
 class TopButtonsGroup extends Component {
@@ -12,7 +13,7 @@ class TopButtonsGroup extends Component {
     const { icon, link } = conf;
     const goTo = this.props.goTo;
     return (
-      <Tooltip key={key} placement="bottomRight" title={link.tooltip}>
+      <Tooltip key={key} placement="bottomRight" title={link.tooltip} mouseLeaveDelay={0}>
         <Button type="primary"
                 icon={icon}
                 size={'default'}
@@ -26,27 +27,23 @@ class TopButtonsGroup extends Component {
 
   prepButtons () {
     const buttonsConf = this.props.buttonsConf || {};
-    if (Object.keys(buttonsConf).length > 0) {
-      return Object.keys(buttonsConf).reduce((v, n, i) => {
-        Object.keys(buttonsConf[n]).forEach(buttonConfInd => {
-          const conf = buttonsConf[n][buttonConfInd];
-          const key = `${i}-${buttonConfInd}`;
-          switch (conf.createType) {
-            case 'link':
-              v.push(this.linkButton(conf, key));
-              break;
-            case 'component':
-              v.push(React.createElement(conf.component, { key, ...conf}));
-              break;
-            default:
-              console.log(`buttonConf createType [${conf.createType}] not supported!`);
-              break;
-          }
-        });
-        return v;
-      }, []);
-    }
-    return [];
+    const confs = prepConfs(buttonsConf);
+    const buttons = [];
+    confs.forEach((conf, confInd) => {
+      const key = confInd;
+      switch (conf.createType) {
+        case 'link':
+          buttons.push(this.linkButton(conf, key));
+          break;
+        case 'component':
+          buttons.push(React.createElement(conf.component, { key, ...conf }));
+          break;
+        default:
+          console.log(`buttonConf createType [${conf.createType}] not supported!`);
+          break;
+      }
+    });
+    return buttons;
   }
 
   render () {

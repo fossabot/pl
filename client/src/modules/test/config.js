@@ -26,7 +26,8 @@ export default {
         accessRoles: ['*'],
         component: Button,
         pane: list.topRightButtonsGroup,
-        tooltip: 'открыть тестовый модуль'
+        tooltip: 'открыть тестовый модуль',
+        orderWeight: 10
       }
     ]
   }

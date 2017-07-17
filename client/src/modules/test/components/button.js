@@ -4,7 +4,7 @@ import {Button, Tooltip} from 'antd';
 export default class extends Component {
   render () {
     return (
-      <Tooltip placement="bottomRight" title={this.props.tooltip}>
+      <Tooltip placement="bottomRight" title={this.props.tooltip} mouseLeaveDelay={0}>
         <Button type="primary" icon="smile-o" size={'default'} />
       </Tooltip>
     )

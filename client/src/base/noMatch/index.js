@@ -1,5 +1,11 @@
 import React from 'react';
+import {Alert} from 'antd';
 
 export default (props) => (
-  <div>Модуль не найден!{props.location.pathname}</div>
+  <div><Alert
+    message="Упс!"
+    description={`Модуль ${props.location.pathname} не найден!`}
+    type="warning"
+    showIcon
+  /></div>
 );
