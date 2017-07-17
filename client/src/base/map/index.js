@@ -15,7 +15,7 @@ class Main extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      routes: getModuleRoutes('/')
+      routes: getModuleRoutes('/map')
     };
   }
 

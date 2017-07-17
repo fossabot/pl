@@ -1,8 +1,9 @@
 import {list} from './../../helpers/panes';
+import {getFirstParam} from './../../helpers/routes';
 
 export default {
   moduleName: 'test',
-  routes: [`/test`, `/administration/test`],
+  routes: [`/map/test`, `/administration/test`],
   config: {
     title: 'Тестовый модуль',
     image: '', // TODO
@@ -14,9 +15,9 @@ export default {
         accessRoles: ['*'],
         rightPaneOpeningRequired: true,
         link: {
-          getPath: (location) => {
+          getPath: (pathname) => {
             // в сложных случаях может потребоваться location (поэтому это функция)
-            return '/test';
+            return `${getFirstParam(pathname)}/test`;
           },
           tooltip: 'открыть тестовый модуль'
         }

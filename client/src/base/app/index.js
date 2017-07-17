@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Route, Switch} from 'react-router-dom';
-import Main from '../main';
+import {Route, Redirect, Switch, Link} from 'react-router-dom';
+import Map from '../map';
 import Administration from '../administration';
 import {getModuleRoutes} from './../../helpers/routes';
 import {Layout} from 'antd';
@@ -12,7 +12,7 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      routes: getModuleRoutes('/app')
+      routes: getModuleRoutes('/')
     };
   }
 
@@ -22,12 +22,20 @@ class App extends Component {
         <Layout>
           <Header>
             <div className="app-emblem-header">
-              <img src={logo} className="app-emblem"/>
+              <Link to="/">
+                <img src={logo} className="app-emblem" alt="logo"/>
+              </Link>
             </div>
           </Header>
           <Content>
             <Switch>
-              <Route path="/" component={Main}/>
+              <Redirect exact path="/" to={{
+                pathname: `/map`,
+                state: {
+                  from: this.props.location
+                }
+              }}/>
+              <Route path="/map" component={Map}/>
               <Route path="/administration" component={Administration}/>
               {this.state.routes}
             </Switch>

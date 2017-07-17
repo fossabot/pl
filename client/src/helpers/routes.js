@@ -42,3 +42,9 @@ export function getModuleRoutes (root) {
 
   return r;
 }
+
+export function getFirstParam (pathName) {
+  const path = pathName || '/';
+  const r = path.split('/');
+  return `/${r[1]}` || '/';
+}

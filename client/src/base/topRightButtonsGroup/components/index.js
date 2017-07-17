@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -19,7 +20,7 @@ class TopRightButtonsGroup extends Component {
                 icon={icon}
                 size={'default'}
                 onClick={() => {
-                  goTo(link.getPath());
+                  goTo(link.getPath(window.location.pathname));
                   if (conf.rightPaneOpeningRequired) {
                     showSplitPane();
                   }
