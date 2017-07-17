@@ -4,11 +4,12 @@ import {connect} from 'react-redux';
 import {createSelector} from 'reselect';
 import {getActions} from './../../../base/actions';
 import {getModuleRoutes} from './../../../helpers/routes';
-import {Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import {push} from 'react-router-redux';
 import config from './../config';
+import LoginForm from './LoginForm';
 
-const {moduleName} = config;
+const { moduleName } = config;
 
 class Test extends Component {
   constructor (props) {
@@ -27,27 +28,26 @@ class Test extends Component {
           props.getTest();
         }}>Обновить данные
         </button>
-        <button onClick={() => {
-          props.goTo('/map');
-        }}>Перейти в main
-        </button>
         <div>
           {JSON.stringify(props.auth.get('data'))}
         </div>
       </div>
-      <Switch>
-        {this.state.routes}
-      </Switch>
+      <div className="auth1">
+        <Switch>
+          <Route path="/" component={LoginForm}/>
+          {this.state.routes}
+        </Switch>
+      </div>
     </div>);
   }
 }
 
 const mapStateTopRops = createSelector(
   state => state.get('auth'),
-  (auth) => ({auth})
+  (auth) => ({ auth })
 );
 const mapDispatchToProps = dispatch => {
-  const {getTest} = getActions(moduleName, ['getTest']);
+  const { getTest } = getActions(moduleName, ['getTest']);
   return bindActionCreators({
     getTest,
     goTo: (route) => push(route)

@@ -4,7 +4,7 @@ import Map from '../map';
 import Administration from '../administration';
 import {getModuleRoutes} from './../../helpers/routes';
 import {Layout} from 'antd';
-import './../styles/app.css';
+import './../styles.css';
 import logo from './logo.png';
 const { Header, Content } = Layout;
 

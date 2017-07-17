@@ -1,0 +1,9 @@
+.auth1 .login-form {
+    max-width: 300px;
+}
+.auth1 .login-form-forgot {
+    float: right;
+}
+.auth1 .login-form-button {
+    width: 100%;
+}
