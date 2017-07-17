@@ -10,7 +10,7 @@ class OpenButton extends Component {
     const {props} = this;
     return (
       <Tooltip placement="bottomRight" title={props.tooltip} mouseLeaveDelay={0}>
-        <Button type="primary" icon="rocket" size={'default'} onClick={() => {
+        <Button type="primary" icon="menu-fold" size={'default'} onClick={() => {
           props.toggleSplitPane(props.splitPane.get('isOpen'));
         }} />
       </Tooltip>
