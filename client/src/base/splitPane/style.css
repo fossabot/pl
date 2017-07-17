@@ -1,3 +1,7 @@
+.SplitPane {
+  height: calc(100% - 64px) !important;
+}
+
 .Resizer {
   background: #000;
   opacity: .2;
