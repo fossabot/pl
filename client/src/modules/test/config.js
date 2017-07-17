@@ -12,6 +12,7 @@ export default {
         pane: list.topRightButtonsGroup,
         icon: 'gift',
         accessRoles: ['*'],
+        rightPaneOpeningRequired: true,
         link: {
           getPath: (location) => {
             // в сложных случаях может потребоваться location (поэтому это функция)

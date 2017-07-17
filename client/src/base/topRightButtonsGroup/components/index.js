@@ -5,20 +5,24 @@ import {createSelector} from 'reselect';
 import {push} from 'react-router-redux';
 import {Button, Tooltip} from 'antd';
 import {prepConfs} from './../../../helpers/panes';
-
+import {getActions} from './../../actions';
 
 class TopRightButtonsGroup extends Component {
 
   linkButton (conf, i) {
     const { icon, link } = conf;
     const goTo = this.props.goTo;
+    const showSplitPane = this.props.showSplitPane;
     return (
       <Tooltip key={i} placement="left" title={link.tooltip} mouseLeaveDelay={0}>
         <Button type="primary"
                 icon={icon}
                 size={'default'}
                 onClick={() => {
-                  goTo(link.getPath())
+                  goTo(link.getPath());
+                  if (conf.rightPaneOpeningRequired) {
+                    showSplitPane();
+                  }
                 }}
         />
       </Tooltip>
@@ -60,7 +64,9 @@ const mapStateTopRops = createSelector(
   (buttonsConf) => ({ buttonsConf })
 );
 const mapDispatchToProps = dispatch => {
+  const { showSplitPane } = getActions('splitPane', ['showSplitPane']);
   return bindActionCreators({
+    showSplitPane,
     goTo: (route) => push(route)
   }, dispatch);
 };
