@@ -1,0 +1,7 @@
+.TopButtonsGroup {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    text-align: center;
+    display: inline-block;
+}
