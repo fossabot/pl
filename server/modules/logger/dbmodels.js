@@ -14,6 +14,9 @@ export default function (sequelize, syncForce) {
       type: {
         type: Sequelize.STRING
       },
+      time: {
+        type: Sequelize.FLOAT
+      }
     });
     if (syncForce || localSyncForce) {
       return sequelize.Log.sync({ force: true })

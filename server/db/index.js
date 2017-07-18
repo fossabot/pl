@@ -3,9 +3,9 @@ import ops from './../options';
 const pg = require('pg');
 import {initDbModules} from './../modules';
 import logger from './../modules/logger';
-const { debug } = logger('db');
+const { debug, errDebug } = logger('db', false);
 
-let sequelize;
+export let db;
 
 function checkConnection (dbConf, callback) {
   const config = {
@@ -20,13 +20,13 @@ function checkConnection (dbConf, callback) {
   const Client = new pg.Client(config);
   Client.connect((err) => {
     if (err) {
-      debug('connect', err.message);
+      errDebug('connect', err.message);
       Client.end();
       return callback(err);
     }
     Client.query('CREATE DATABASE ' + dbConf.dbName, function(err) {
       if (err && err.code !== '42P04') {
-        debug('Client.query CREATE DATABASE', err);
+        errDebug('Client.query CREATE DATABASE', err);
         Client.end();
         return callback(err);
       }
@@ -39,27 +39,27 @@ function checkConnection (dbConf, callback) {
 export default function () {
   return new Promise((resolve, reject) => {
     const { dbName, username, password, options, syncForce } = ops.config.db;
-    sequelize = new Sequelize(dbName, username, password, options);
+    db = new Sequelize(dbName, username, password, options);
     checkConnection(ops.config.db, (err) => {
       if (err) {
         return reject(err);
       }
-      sequelize
+      db
         .authenticate()
         .then(() => {
           debug('db authenticated.');
-          initDbModules(sequelize, syncForce)
+          initDbModules(db, syncForce)
             .then(() => {
               debug('initializing', 'done.');
               return resolve();
             })
             .catch(err => {
-              debug('initDbModules', err.message);
+              errDebug('initDbModules', err.message);
               return reject(err);
             });
         })
         .catch(err => {
-          debug('authenticate', err.message);
+          errDebug('authenticate', err.message);
           return reject(err);
         });
     });

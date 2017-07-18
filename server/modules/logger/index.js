@@ -1,27 +1,25 @@
 import dg from 'debug';
+import {db} from './../../db';
 
-export function log (key, msg) {
-  // TODO save
-  dg(`${key}`, msg);
-}
 
-export default function (key) {
+
+export default function (key, publish = true) {
   const topicKey = `pl.${key}`;
+
+  function log (key, message, type = 'info', time) {
+    if (publish && db && db.hasOwnProperty('Log')) {
+      db.Log.create({key, message, type, time})
+    }
+  }
+
   return {
-    log: function (key, msg) {
-      let k = `${topicKey}.info`;
-      if (msg === undefined) {
-        msg = key;
-      } else {
-        k += `.${key}`
-      }
-      log(k, msg);
-    },
-    errLog: function (key, msg) {
-      log(`${topicKey}.err.${key}`, msg);
-    },
     debug: function () {
       dg(`${topicKey}`).call(undefined,  '|', new Date().toJSON(), '|', ...arguments);
+      log(key, argsStrConcat(arguments));
+    },
+    errDebug: function () {
+      dg(`${topicKey}.error`).call(undefined,  '|', new Date().toJSON(), '|', ...arguments);
+      log(key, argsStrConcat(arguments), 'error');
     },
     time: function () {
       const args = arguments;
@@ -29,7 +27,18 @@ export default function (key) {
       return function () {
         const diff = new Date() - dt;
         dg(`${topicKey}`).call(undefined, '|', new Date().toJSON(), '| TIME: ', diff / 1000, '|', ...args, '|', ...arguments);
+        let message = argsStrConcat(args);
+        message += argsStrConcat(arguments);
+        log(key, message, 'time', diff / 1000);
       }
     }
   }
+}
+
+function argsStrConcat (args) {
+  const arr = [...args];
+  return arr.reduce((v, n) => {
+    v += `${n} | `;
+    return v;
+  }, ` | `);
 }
