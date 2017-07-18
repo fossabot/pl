@@ -1,3 +1,16 @@
 {
-  port: "5555"
+  port: "5555",
+  rootApi: "/api",
+  db: {
+    options: {
+        dialect: "postgres",
+        host: "127.0.0.1",
+        port: 5432,
+        logging: false
+      },
+    username: "postgres",
+    password: "Informatica21",
+    dbName: "pl",
+    syncForce: true
+  }
 }

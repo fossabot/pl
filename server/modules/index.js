@@ -1,12 +1,22 @@
-import express from 'express';
-import path from 'path';
 import * as modules from './using';
+import options from './../options';
 
-const root = '/api';
-export default function (app) {
+export function initRouters (app) {
   Object.keys(modules).forEach(moduleName => {
-    const {route, router} = modules[moduleName];
-    app.use(root + route, router);
+    if (modules[moduleName] && modules[moduleName].hasOwnProperty('router')) {
+      const { route, router } = modules[moduleName].router;
+      console.log(options.config.rootApi);
+      app.use(options.config.rootApi + route, router);
+    }
   });
-  app.use(`${root}/static`, express.static(path.resolve(process.cwd(), 'server/static')));
+}
+
+export function initDbModules (sequelize, syncForce) {
+  const promises = Object.keys(modules).reduce((v, n) => {
+    if (modules[n] && modules[n].hasOwnProperty('dbmodels')) {
+      v.push(modules[n].dbmodels(sequelize, syncForce));
+    }
+    return v;
+  }, []);
+  return Promise.all(promises);
 }
