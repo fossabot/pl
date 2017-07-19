@@ -12,10 +12,10 @@ import db from './db';
 const app = express();
 app.use(bodyParser.json({ limit: `1024mb` }));
 app.use(cors({ origin: true }));
-routers(app);
 
 db()
   .then(() => {
+    routers(app);
     const httpServer = http.Server(app);
     httpServer.listen(options.config.port);
     /* eslint-disable no-console */

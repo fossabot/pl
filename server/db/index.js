@@ -1,9 +1,12 @@
 import Sequelize from 'sequelize';
 import ops from './../options';
+
 const pg = require('pg');
 import {initDbModules} from './../modules';
+import initialData from './initial-data';
 import logger from './../modules/logger';
-const { debug, errDebug } = logger('db', false);
+
+const { debug, errDebug, time } = logger('db');
 
 export let db;
 
@@ -24,7 +27,7 @@ function checkConnection (dbConf, callback) {
       Client.end();
       return callback(err);
     }
-    Client.query('CREATE DATABASE ' + dbConf.dbName, function(err) {
+    Client.query('CREATE DATABASE ' + dbConf.dbName, function (err) {
       if (err && err.code !== '42P04') {
         errDebug('Client.query CREATE DATABASE', err);
         Client.end();
@@ -50,7 +53,20 @@ export default function () {
           debug('db authenticated.');
           initDbModules(db, syncForce)
             .then(() => {
-              debug('initializing', 'done.');
+              debug('dbmodules initialized');
+              // if (syncForce) {
+              //   const initialDataTime = time('initialData');
+              //   initialData()
+              //     .then(() => {
+              //       initialDataTime('done.');
+              //     })
+              //     .catch(err => {
+              //       initialDataTime('done with err.', err.message);
+              //       return reject(err);
+              //     });
+              // } else {
+              //   return resolve();
+              // }
               return resolve();
             })
             .catch(err => {
@@ -59,7 +75,7 @@ export default function () {
             });
         })
         .catch(err => {
-          errDebug('authenticate', err.message);
+          errDebug('db authenticate', err.message);
           return reject(err);
         });
     });
